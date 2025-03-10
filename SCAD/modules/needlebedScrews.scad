@@ -9,7 +9,7 @@ module screwHoles(screw) {
     screw_x = gauge/2;
 	front_screw_y = -BACK_COVER + 5;
 	back_screw_y = -5;
-	spongebar_screw_y = -(NEEDLE_BED_DEPTH-COMB) + SPONGE_BAR/2;//SPONGE_BAR/2 - NEEDLE_BED_DEPTH-COMB;
+	spongebar_screw_y = SPONGE_BAR/2 - NEEDLE_BED_DEPTH - COMB;
 	// heights
 	screw_height = needleBedHeight*2 + 1;
 	screw_head_height = screwHeadHeight*2 + tolerance;
