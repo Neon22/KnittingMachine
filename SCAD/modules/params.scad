@@ -15,7 +15,8 @@ making changes to the cam design in the technical sketch.
 
 // sphere and cylinder facet counts
 $fn = 50;
-cylres30 = 30;
+cylres30 = 30;  // roundedrail
+cylres25 = 25;  // connector
 
 STANDARD_GAUGE = 4.5;
 MID_GAUGE = 6.5;
