@@ -92,22 +92,24 @@ module needleBed() {
 
 // This files primary object
 module build_needle_bed() {
+	LH_xpos = -(gauge/2 + tolerance);
+	RH_xpos = gauge * (numNeedles-1) + gauge/2;
 	union() {
 		difference() {
 			// from needlebed
 			needleBed();
 			// subtracting connectors on LHS
-			translate([-gauge/2 - tolerance,-connectorOffset,-needleBedHeight-tolerance])
+			translate([LH_xpos, -connectorOffset, -needleBedHeight-tolerance])
 				connector();
-			translate([-gauge/2 - tolerance,-(NEEDLE_BED_DEPTH-connectorOffset),-needleBedHeight - tolerance])
+			translate([LH_xpos, -(NEEDLE_BED_DEPTH-connectorOffset), -needleBedHeight - tolerance])
 				connector();
 			// and screw holes
 			needleBedScrews(numNeedles, gauge);
 		}
 		// adding connectors on RHS
-		translate([gauge*(numNeedles-1)+gauge/2,-connectorOffset,-needleBedHeight])
+		translate([RH_xpos, -connectorOffset, -needleBedHeight])
 			connector(tolerance = tolerance);
-		translate([gauge*(numNeedles-1)+gauge/2,-(NEEDLE_BED_DEPTH-connectorOffset),-needleBedHeight])
+		translate([RH_xpos, -(NEEDLE_BED_DEPTH-connectorOffset), -needleBedHeight])
 			connector(tolerance = tolerance);
 	}
 }
