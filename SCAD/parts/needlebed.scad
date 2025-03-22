@@ -2,16 +2,8 @@ include<../modules/params.scad>;
 use<../modules/needlebedScrews.scad>;
 use<../modules/connector.scad>;
 
-module needleUnit() {
-    difference() {
-        needleBase();
-        needleSlot();
-        backCoverCutout();
-        spongeBarCutout();
-        combCutout();
-        frontAngle();
-    }
-}
+
+// Needed for needleUnit
 
 module needleBase() {
     translate([0,-NEEDLE_BED_DEPTH/2, -needleBedHeight/2])
@@ -52,28 +44,27 @@ module frontAngle(width = gauge) {
     polygon(points = [[0,0],[-needleBedHeight,0],[0,-lastPoint]]);
 }
 
+// Make the needle unit
+module needleUnit() {
+    difference() {
+        needleBase();
+        needleSlot();
+        backCoverCutout();
+        spongeBarCutout();
+        combCutout();
+        frontAngle();
+    }
+}
+
+// Needed for needleBed
 module spongeBarSpacers() {
     translate([-gauge/2,-(NEEDLE_BED_DEPTH-COMB) + SPONGE_BAR - 2, -needleSlotHeight/2 - 1 - tolerance])
     cube([gauge/2, 4, needleSlotHeight - 2], center = true);
     translate([-gauge/2,-(NEEDLE_BED_DEPTH-COMB) + 2, -needleSlotHeight/2 - 1 - tolerance])
     cube([gauge/2, 4, needleSlotHeight - 2], center = true);
 }
-union() {
-    difference() {
-        needleBed();
-        translate([-gauge/2 - tolerance,-connectorOffset,-needleBedHeight-tolerance])
-        #connector();
-        translate([-gauge/2 - tolerance,-(NEEDLE_BED_DEPTH-connectorOffset),-needleBedHeight - tolerance])
-        #connector();
-        needleBedScrews();
-    }
-    translate([gauge*(numNeedles-1)+gauge/2,-connectorOffset,-needleBedHeight])
-                connector(tolerance = tolerance);
-                translate([gauge*(numNeedles-1)+gauge/2,-(NEEDLE_BED_DEPTH-connectorOffset),-needleBedHeight])
-                connector(tolerance = tolerance);
-}
-    
 
+// Make the needleBed
 module needleBed() {
     for(i = [0:numNeedles-1]) {
         if (i==screwPlacement || i==numNeedles-screwPlacement) {
@@ -88,3 +79,26 @@ module needleBed() {
         }  
     }
 }
+
+// This files primary object
+module build_needle_bed() {
+	union() {
+		difference() {
+			needleBed();
+			translate([-gauge/2 - tolerance,-connectorOffset,-needleBedHeight-tolerance])
+			#connector();
+			translate([-gauge/2 - tolerance,-(NEEDLE_BED_DEPTH-connectorOffset),-needleBedHeight - tolerance])
+			#connector();
+			needleBedScrews();
+		}
+		translate([gauge*(numNeedles-1)+gauge/2,-connectorOffset,-needleBedHeight])
+					connector(tolerance = tolerance);
+					translate([gauge*(numNeedles-1)+gauge/2,-(NEEDLE_BED_DEPTH-connectorOffset),-needleBedHeight])
+					connector(tolerance = tolerance);
+	}
+}
+
+
+make_needle_bed();
+    
+
