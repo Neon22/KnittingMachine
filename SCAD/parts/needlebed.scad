@@ -2,8 +2,17 @@ include<../modules/params.scad>;
 use<../modules/needlebedScrews.scad>;
 use<../modules/connector.scad>;
 
+/* [Parameters] */
 
-// Needed for needleUnit
+// Knitting machine Bed Size
+gauge = 4.5;  // [4.5:STANDARD_GAUGE, 6.5:MID_GAUGE, 9.0:BULKY_GAUGE]
+// Number of Needles
+numNeedles = 25;
+// 3D printer slop margin
+tolerance = 0.2;
+
+/* [Hidden] */
+
 
 module needleBase() {
     translate([0,-NEEDLE_BED_DEPTH/2, -needleBedHeight/2])
@@ -99,6 +108,6 @@ module build_needle_bed() {
 }
 
 
-make_needle_bed();
+build_needle_bed();
     
 
