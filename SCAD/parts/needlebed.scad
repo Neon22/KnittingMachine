@@ -13,7 +13,6 @@ tolerance = 0.2;
 
 /* [Hidden] */
 
-
 module needleBase() {
 	translate([0,-NEEDLE_BED_DEPTH/2, -needleBedHeight/2])
 		cube([gauge, NEEDLE_BED_DEPTH, needleBedHeight], center=true);
@@ -103,7 +102,7 @@ module build_needle_bed() {
 			translate([-gauge/2 - tolerance,-(NEEDLE_BED_DEPTH-connectorOffset),-needleBedHeight - tolerance])
 				connector();
 			// and screw holes
-			needleBedScrews();
+			needleBedScrews(numNeedles, gauge);
 		}
 		// adding connectors on RHS
 		translate([gauge*(numNeedles-1)+gauge/2,-connectorOffset,-needleBedHeight])
