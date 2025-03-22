@@ -13,7 +13,9 @@ I recommend only modifying these constants if you are also
 making changes to the cam design in the technical sketch.
 */
 
+// sphere and cylinder facet counts
 $fn = 50;
+cylres30 = 30;
 
 STANDARD_GAUGE = 4.5;
 MID_GAUGE = 6.5;
