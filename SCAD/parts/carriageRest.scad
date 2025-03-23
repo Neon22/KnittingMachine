@@ -4,50 +4,33 @@ use<../parts/backCover.scad>;
 use<../parts/spongeBar.scad>;
 use<../modules/connector.scad>;
 
-// TODO: needs refactoring!
+/* [Parameters] */
 
+// Knitting machine Bed Size
+gauge = 4.5;  // [4.5:STANDARD_GAUGE, 6.5:MID_GAUGE, 9.0:BULKY_GAUGE]
+// Number of Needles
+numNeedles = 25;
+// 3D printer slop margin
+tolerance = 0.2;
+Show_clamp = true;
+// Rotate for printing
+orientation = true;
+/* [Clamp] */
 
-// belong in params maybe ?
 clampWidth = 50;
-clampDepth = NEEDLE_BED_DEPTH-clampWidth/2; 
 clampThickness = 6;
-clampHollow = 85; // adjust this for your table thickness
+// Table Thickness
+clampHollow = 85;
+clampDepth = NEEDLE_BED_DEPTH - clampWidth/2;
 
-
-//
-// LEFT
-union() {
-    translate([-gauge, 0, 0])
-    carriageRest();
-//    translate([-gauge/2,-connectorOffset,-needleBedHeight])
-//    connector(tolerance = tolerance);
-//    translate([-gauge/2,-(NEEDLE_BED_DEPTH-connectorOffset),-needleBedHeight])
-//    connector(tolerance = tolerance);
-}
-
-//RIGHT
-//difference() {
-    translate([gauge*numNeedles, 0, 0])
-    mirror([1,0,0])
-    carriageRest();
-//    translate([gauge*numNeedles - gauge/2 - tolerance,-connectorOffset,-needleBedHeight-tolerance])
-//    connector();
-//    translate([gauge*numNeedles - gauge/2 - tolerance,-(NEEDLE_BED_DEPTH-connectorOffset),-needleBedHeight - tolerance])
-//    connector();
-//}
-
-////// CLAMP
-translate([-gauge,0,0])
-clampUnit();
-
-
+/* [Hidden] */
 
 //
 module carriageRest() {
     union() {
         difference() {
 			// round corners of needleBase
-            hull() {
+            hull() {  // build a single needlebed and hull to widen
                 needleBase();   
                 translate([-CAM_PLATE_WIDTH, -10, -needleBedHeight/2])
 					cylinder(needleBedHeight, 10, 10, center=true); 
@@ -87,7 +70,7 @@ module clampScrew(side=1) {
 
 // screwholes for clamp
 module clampScrews() {
-    #translate([-CAM_PLATE_WIDTH/2, 0, -needleBedHeight]) {
+    translate([-CAM_PLATE_WIDTH/2, 0, -needleBedHeight]) {
         translate([0, -(NEEDLE_BED_DEPTH-clampWidth), 0])
 		for (side = [1,-1])
 			clampScrew(side);
@@ -137,6 +120,43 @@ module clampUnit() {
         }        
     }
 }
+
+module build_carriage_rest () {
+	// Left side carriage
+	union() {
+		translate([-gauge, 0, 0])
+			carriageRest();
+		// Connectors
+		translate([-gauge/2, -connectorOffset, -needleBedHeight])
+			connector(tolerance = tolerance);
+		translate([-gauge/2, -(NEEDLE_BED_DEPTH-connectorOffset), -needleBedHeight])
+			connector(tolerance = tolerance);
+	}
+	// Right side carriage
+	difference() {
+		translate([gauge*numNeedles, 0, 0])
+		mirror([1,0,0])
+			carriageRest();
+		// Connectors
+		translate([gauge*numNeedles - gauge/2 - tolerance, -connectorOffset, -needleBedHeight-tolerance])
+			connector();
+		translate([gauge*numNeedles - gauge/2 - tolerance, -(NEEDLE_BED_DEPTH-connectorOffset), -needleBedHeight - tolerance])
+			connector();
+	}
+}
+
+build_carriage_rest();
+
+// Clamps
+if (Show_clamp)
+	if (orientation)
+		translate([CAM_PLATE_WIDTH,CAM_PLATE_WIDTH,-CAM_PLATE_WIDTH/2])
+		rotate([0,90,0])
+			clampUnit();
+	else 
+		translate([-gauge,0,0])
+			clampUnit();
+	
 
 
 // Questions:
