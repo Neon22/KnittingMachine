@@ -6,10 +6,14 @@ use<../modules/connector.scad>;
 
 // TODO: needs refactoring!
 
+
+// belong in params maybe ?
 clampWidth = 50;
 clampDepth = NEEDLE_BED_DEPTH-clampWidth/2; 
 clampThickness = 6;
 clampHollow = 85; // adjust this for your table thickness
+
+
 
 // LEFT
 union() {
@@ -40,60 +44,54 @@ clampUnit();
 module carriageRest() {
     union() {
         difference() {
+			// round corners of needleBase
             hull() {
                 needleBase();   
                 translate([-CAM_PLATE_WIDTH, -10, -needleBedHeight/2])
-                cylinder(needleBedHeight, 10, 10, center = true); 
+					cylinder(needleBedHeight, 10, 10, center = true); 
                 
                 translate([-CAM_PLATE_WIDTH, -NEEDLE_BED_DEPTH+10, -needleBedHeight/2])
-                cylinder(needleBedHeight, 10, 10, center = true); 
+					cylinder(needleBedHeight, 10, 10, center = true); 
             }
+			// subtract angled front
             for(i = [0:ceil(CAM_PLATE_WIDTH/gauge)]) {
-               translate([-gauge*i, 0, 0])
-               frontAngle(CAM_PLATE_WIDTH + 10);
+				translate([-gauge*i, 0, 0])
+					frontAngle(CAM_PLATE_WIDTH + 10);
             }
             // cutout for clamp
             translate([-CAM_PLATE_WIDTH/2, -NEEDLE_BED_DEPTH, -needleBedHeight])
                 cube([clampWidth, clampDepth*2, clampThickness*2], center = true); 
-            clampScrews();
+            // screws
+			clampScrews();
         }
-//        translate([gauge/2-CAM_PLATE_WIDTH/4,0,0]) {
-//            frontRail(CAM_PLATE_WIDTH/2, rounded = true);
-//            backRail(CAM_PLATE_WIDTH/2, rounded = true);
-//        }
+		// front and rear rails
+        translate([gauge/2-CAM_PLATE_WIDTH/4,0,0]) {
+			frontRail(CAM_PLATE_WIDTH/2, rounded = true);
+			backRail(CAM_PLATE_WIDTH/2, rounded = true);
+       }
     }
 }
 
+// clamp screws
+module clampScrew(side=1) {
+	xpos = side * clampWidth/2 + side*-1 * screwHeadDiam*1.5;
+	// screw
+	translate([xpos, 0, 0])
+		cylinder(screwHeight*2, d=screwDiam, center = true);
+	// screwhead
+	translate([xpos, 0, 0])
+		cylinder((screwHeadHeight + tolerance)*2, d=screwHeadDiam, center=true, $fn=cylres25);
+}
+
+// screwholes for clamp
 module clampScrews() {
-    // screwholes for clamp
-    $fn = 50;
-    translate([-CAM_PLATE_WIDTH/2,0,-needleBedHeight]) {
-        translate([0,-(NEEDLE_BED_DEPTH-clampWidth),0]) {
-            translate([- clampWidth/2 + screwHeadDiam*1.5, 0, 0])
-            #cylinder(screwHeight*2, d = screwDiam, center = true); 
-            
-            translate([ - clampWidth/2 + screwHeadDiam*1.5, 0, 0])
-            #cylinder((screwHeadHeight + tolerance)*2, d = screwHeadDiam, center = true); 
-            
-            translate([ + clampWidth/2 - screwHeadDiam*1.5, 0, 0])
-            #cylinder(screwHeight*2, d = screwDiam, center = true); 
-            
-            translate([ + clampWidth/2 - screwHeadDiam*1.5, 0, 0])
-            #cylinder((screwHeadHeight + tolerance)*2, d = screwHeadDiam, center = true); 
-        }
-        translate([0,-clampWidth*2/3,0]) {
-            translate([- clampWidth/2 + screwHeadDiam*1.5, 0, 0])
-            #cylinder(screwHeight*2, d = screwDiam, center = true); 
-            
-            translate([ - clampWidth/2 + screwHeadDiam*1.5, 0, 0])
-            #cylinder((screwHeadHeight + tolerance)*2, d = screwHeadDiam, center = true); 
-            
-            translate([ + clampWidth/2 - screwHeadDiam*1.5, 0, 0])
-            #cylinder(screwHeight*2, d = screwDiam, center = true); 
-            
-            translate([ + clampWidth/2 - screwHeadDiam*1.5, 0, 0])
-            #cylinder((screwHeadHeight + tolerance)*2, d = screwHeadDiam, center = true); 
-        }
+    #translate([-CAM_PLATE_WIDTH/2,0,-needleBedHeight]) {
+        translate([0,-(NEEDLE_BED_DEPTH-clampWidth),0])
+		for (side = [1,-1])
+			clampScrew(side);
+		translate([0,-clampWidth*2/3,0])
+		for (side = [1,-1])
+			clampScrew(side);
     }
 }
 
@@ -137,3 +135,6 @@ module clampUnit() {
     }
 }
 
+
+// Questions:
+// - is it better to use screws to screw in front and rear rails so printing is easier
