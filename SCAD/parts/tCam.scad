@@ -3,11 +3,6 @@ include<../modules/camplate_coords_mk2.scad>;
 include<../modules/utils.scad>;
 //include<../modules/camPinHoles.scad>;
 
-/* [Parameters] */
-
-// Rotate for printing
-orientation = false;
-
 
 module tCam() {
     // adjustable tension cams
@@ -45,13 +40,10 @@ module build_a_tCam() {
 }
 
 module build_tCams() {
-	angle = !orientation ? 180 : 0 ;
-	rotate([angle,0,0]) {
-		// build 2, mirrored
+	// build 2, mirrored
+	build_a_tCam();
+	mirror([1,0,0])
 		build_a_tCam();
-		mirror([1,0,0])
-			build_a_tCam();
-	}
 }
 
 
