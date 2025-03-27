@@ -30,20 +30,29 @@ module tPivot(tol=0, solid=false) {
 }
 
 
-// build one
-module build_a_tCam() {
+// build LHS tCam
+module build_tCam() {
 	translate(tCamCoords)
 		tCam();
-	//
+	// pivot
 	translate(tPivotCoords)
 		tPivot(solid = true);
 }
+// build RHS tCam (mirrored and flipped)
+module build_tCam_mirrored() {
+	translate(flip(tCamCoords))
+	mirror([1,0,0]) 
+		tCam();
+	// pivot
+	translate(flip(tPivotCoords))
+	mirror([1,0,0]) 
+		tPivot(solid = true);
+}
+
 
 module build_tCams() {
-	// build 2, mirrored
-	build_a_tCam();
-	mirror([1,0,0])
-		build_a_tCam();
+	build_tCam();
+	build_tCam_mirrored();
 }
 
 
