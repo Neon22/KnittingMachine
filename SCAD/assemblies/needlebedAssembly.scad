@@ -11,12 +11,6 @@ See individual files to export models
 
 /* [Parameters] */
 
-// Knitting machine Bed Size
-gauge = 4.5;  // [4.5:STANDARD_GAUGE, 6.5:MID_GAUGE, 9.0:BULKY_GAUGE]
-// Number of Needles
-numNeedles = 25;
-// 3D printer slop margin
-tolerance = 0.2;
 // Show Needle bed
 Show_bed = true;
 Show_back_cover = true;
