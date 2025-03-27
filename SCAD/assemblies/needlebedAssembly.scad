@@ -22,16 +22,17 @@ Show_bed = true;
 Show_back_cover = true;
 back_cover_rounded = true;
 Show_spongebar = true;
+Show_carriage_rests = true;
 Show_clamps = true;
+
 /* [Hidden] */
 
 
 
 
 // Show assembly
-if (Show_bed) {
+if (Show_bed)
 	build_needle_bed();
-}
 if (Show_back_cover) {
 	color("lightblue")
 		build_backCover(back_cover_rounded);
@@ -40,10 +41,13 @@ if (Show_spongebar) {
 	color("orange")
 		build_spongeBar();
 }
-// if (Show_clamps) {
-	// color("cyan")
-		// build_clamps();
-// }
+if (Show_carriage_rests)
+	build_carriage_rest();
+
+if (Show_clamps)
+	translate([-gauge,0,0])
+		clampUnit();
+
 color("red")
 translate([0,40,0])
 rotate([00,0,0]) {
