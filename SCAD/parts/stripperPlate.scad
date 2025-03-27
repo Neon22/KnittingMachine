@@ -43,7 +43,7 @@ module stripperPlateNose() {
     }
 }
 
-// unused
+// unused here. Used by yarnCarrierCover()
 module yarnCarrierCutout() {
 	hull() {
 		// translate([CAM_PLATE_WIDTH/2,0,0])
@@ -51,11 +51,11 @@ module yarnCarrierCutout() {
             
 		// back
 		translate([CAM_PLATE_WIDTH/2,YARN_DEPOSIT_Y,(camHeight + camPlateHeight*2)])
-			cylinder(h=40, r=29, center=true);
+			cylinder(h=40, r=29, center=true, $fn=cylres100);
 		 
 		// wide cone front   
 		translate([CAM_PLATE_WIDTH/2,YARN_DEPOSIT_Y - 35,(camHeight + camPlateHeight)/2])
-			cylinder(h=camHeight + camPlateHeight, d=CAM_PLATE_WIDTH - 55*2, center=true);
+			cylinder(h=camHeight + camPlateHeight, d=CAM_PLATE_WIDTH - 55*2, center=true, $fn=cylres50);
                 
 		// small frontmost
 		// translate([CAM_PLATE_WIDTH/2,YARN_DEPOSIT_Y - 35,-camPlateHeight])
@@ -94,3 +94,4 @@ module build_stripper_plate() {
 
 //
 build_stripper_plate();
+//yarnCarrierCutout();  // used by yarnCarrierCover()
