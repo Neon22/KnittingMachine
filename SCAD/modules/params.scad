@@ -17,6 +17,8 @@ making changes to the cam design in the technical sketch.
 $fn = 50;
 cylres30 = 30;  // roundedrail
 cylres25 = 25;  // connector
+cylres50 = 50;  // yarnfeeder, 
+cylres100 = 100;  // Yarnfeeder
 
 STANDARD_GAUGE = 4.5;
 MID_GAUGE = 6.5;
