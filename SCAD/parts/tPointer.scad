@@ -20,18 +20,22 @@ module tPointer() {
 
 
 // build it
-if (orientation) {
-	translate([-40,-40,0])
-	rotate([0,0,120])
-		tPointer();
-	translate([-10,-40,0])
-	rotate([0,0,120])
-		tPointer();
-} else {  // non printing
-	rotate([0,0,0])
-		tPointer();
-	translate([158,-61.5,0])
-	rotate([0,0,-120])
-	translate([-25,60,0])
-		tPointer();
+module build_pointers() {
+	if (orientation) {
+		translate([-40,-40,0])
+		rotate([0,0,120])
+			tPointer();
+		translate([-10,-40,0])
+		rotate([0,0,120])
+			tPointer();
+	} else {  // non printing
+		rotate([0,0,0])
+			tPointer();
+		translate([158,-61.5,0])
+		rotate([0,0,-120])
+		translate([-25,60,0])
+			tPointer();
+	}
 }
+
+build_pointers();
