@@ -1,18 +1,7 @@
 include<../modules/params.scad>;
 use<../modules/carriageScrews.scad>;
-use<../parts/stripperPlate.scad>;
+//use<../parts/stripperPlate.scad>;
 
-translate([CAM_PLATE_WIDTH/2,0,0])
-difference() {
-    yarnFeeder();
-    translate([-CAM_PLATE_WIDTH/2,0,0])
-    yarnSlot();
-}
-difference() {
-    yarnFeederPlate();
-    yarnSlot();
-    carriageScrews();
-}
 
 
 module yarnFeeder() {
@@ -27,17 +16,17 @@ module yarnFeeder() {
             translate([6,6,0])
             circle(r = 1.5, $fn = 100);
         }
-        // lowest surface of guide should hit at jussst the right spot, but subtract the surface of the stripper plate to get correct angle in case yarn guide shape dips too low
-        translate([0,-NEEDLE_BED_DEPTH - NEEDLE_EXTENSION - tolerance * 2,-needleSlotHeight + HOOK_DIAM])
-        stripperPlate();
+		// subtract stripper plate
+        // lowest surface of guide should hit at just the right spot, but subtract the surface of the stripper plate to get correct angle in case yarn guide shape dips too low
+        //translate([0,-NEEDLE_BED_DEPTH - NEEDLE_EXTENSION - tolerance * 2,-needleSlotHeight + HOOK_DIAM])
+		//	stripperPlate();
     }
 }
 
+// The gap in the unit for yarn to go through
 module yarnSlot() {
-    difference() {
-        translate([CAM_PLATE_WIDTH/2,YARN_DEPOSIT_Y-15,0])
+	translate([CAM_PLATE_WIDTH/2,YARN_DEPOSIT_Y-15,0])
         cube([1.5,30,20], center = true);
-    }
 }
 
 module yarnFeederPlate() {
@@ -61,3 +50,22 @@ module yarnFeederPlate() {
         cylinder(h= (5)*2, d = 19 , center = true);
     }
 }
+
+//
+module build_yarn_feeder() {
+	difference() {
+		// The plate
+		union() {
+			yarnFeederPlate();
+			// cone
+			translate([CAM_PLATE_WIDTH/2,0,0])
+				yarnFeeder();
+		}
+		// subtract the slot
+		yarnSlot();
+		// and the screw holes
+		carriageScrews();
+	}
+}
+
+build_yarn_feeder();
