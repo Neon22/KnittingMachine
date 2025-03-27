@@ -6,6 +6,11 @@ use<spongeBar.scad>;
 use<tCam.scad>;
 use<../modules/carriageScrews.scad>;
 
+/* [Parameters] */
+
+// Rotate for printing
+orientation = false;
+
 
 // cut into backplate
 module tSlots() {
@@ -174,7 +179,11 @@ module build_back_plate() {
 }
 
 //
-build_back_plate();  // mk2
+if (orientation)
+	rotate([180,0,0])
+	build_back_plate();  // mk2
+else
+	build_back_plate();  // mk2
 // camRails();
 // camRailsInlet();
 // rounded_sides();
