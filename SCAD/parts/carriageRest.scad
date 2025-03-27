@@ -14,7 +14,7 @@ numNeedles = 25;
 tolerance = 0.2;
 Show_clamp = true;
 // Rotate for printing
-orientation = true;
+orientation = false;
 /* [Clamp] */
 
 clampWidth = 50;

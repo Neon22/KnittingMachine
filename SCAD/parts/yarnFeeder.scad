@@ -2,7 +2,12 @@ include<../modules/params.scad>;
 use<../modules/carriageScrews.scad>;
 //use<../parts/stripperPlate.scad>;
 
+/* [Parameters] */
 
+// 3D printer slop margin
+tolerance = 0.2;
+// Rotate for printing
+orientation = false;
 
 module yarnFeeder() {
 	// yarn guide
@@ -70,4 +75,8 @@ module build_yarn_feeder() {
 	}
 }
 
-build_yarn_feeder();
+if (orientation)
+	rotate([180,0,0])
+		build_yarn_feeder();
+else
+	build_yarn_feeder();
