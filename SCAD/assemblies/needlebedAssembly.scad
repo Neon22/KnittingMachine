@@ -47,9 +47,9 @@ if (Show_spongebar) {
 color("red")
 translate([0,40,0])
 rotate([00,0,0]) {
-	text("Do not print from this file.");
-	translate([0,-20,0])
-	text("Assembly Visualisation only.");
+	text("Do not print from this file.", size=5);
+	translate([0,-15,0])
+	text("Assembly Visualisation.");
 	}
 	
 // Note:
