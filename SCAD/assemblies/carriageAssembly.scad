@@ -1,5 +1,5 @@
-include<../assemblies/camplate.scad>;
-include<../assemblies/yarnCarrier.scad>;
+include<../assemblies/assembled_camplate.scad>;
+include<../assemblies/assembled_yarnCarrier.scad>;
 
 /* 
 Full carriage assembly (camplate and yarn carrier) for layout and debugging
