@@ -22,16 +22,16 @@ Show_carrier_cover = true;
 
 // Show assembly
 if (Show_yarn_feeder)
-	build_yarn_feeder();
+    build_yarn_feeder();
 if (Show_stripper_plate)
-	build_stripper_plate();
+    build_stripper_plate();
 if (Show_carrier_cover)
-	build_yarn_carrier_cover();
+    build_yarn_carrier_cover();
 
 color("red")
 translate([0,40,0])
 rotate([00,0,0]) {
-	text("Do not print from this file.", size=5);
-	translate([0,-15,0])
-	text("Assembly Visualisation.");
-	}
+    text("Do not print from this file.", size=5);
+    translate([0,-15,0])
+    text("Assembly Visualisation.");
+    }

@@ -17,8 +17,8 @@ Rounded = true;  // [true,false]
 
 
 module backCover(width=gauge) { 
-	translate([0,-BACK_COVER/2, -((screwHeadHeight + 1) - tolerance)/2])
-		cube([width, BACK_COVER - tolerance, (screwHeadHeight + 1) - tolerance], center=true);
+    translate([0,-BACK_COVER/2, -((screwHeadHeight + 1) - tolerance)/2])
+        cube([width, BACK_COVER - tolerance, (screwHeadHeight + 1) - tolerance], center=true);
 }
 
 module backRail(width=gauge, rounded=false, tolerance=tolerance) {
@@ -33,15 +33,15 @@ module backRail(width=gauge, rounded=false, tolerance=tolerance) {
 
 //
 module build_backCover(round_ends=true) {
-	difference() {
-		translate([gauge*numNeedles/2 - gauge/2, 0, 0])
-			backCover(width = numNeedles*gauge);
-		// subtract screw holes
-		needleBedScrews(numNeedles, gauge);
-	}
-	// add backrail
-	translate([(gauge*numNeedles)/2 - gauge/2, 0, 0]) 
-		backRail(width=numNeedles * gauge, rounded=round_ends);
+    difference() {
+        translate([gauge*numNeedles/2 - gauge/2, 0, 0])
+            backCover(width = numNeedles*gauge);
+        // subtract screw holes
+        needleBedScrews(numNeedles, gauge);
+    }
+    // add backrail
+    translate([(gauge*numNeedles)/2 - gauge/2, 0, 0]) 
+        backRail(width=numNeedles * gauge, rounded=round_ends);
 }
 
 build_backCover(Rounded);

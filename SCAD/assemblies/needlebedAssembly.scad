@@ -26,30 +26,30 @@ Show_clamps = true;
 
 // Show assembly
 if (Show_bed)
-	build_needle_bed();
+    build_needle_bed();
 if (Show_back_cover) {
-	color("lightblue")
-		build_backCover(back_cover_rounded);
+    color("lightblue")
+        build_backCover(back_cover_rounded);
 }
 if (Show_spongebar) {
-	color("orange")
-		build_spongeBar();
+    color("orange")
+        build_spongeBar();
 }
 if (Show_carriage_rests)
-	build_carriage_rest();
+    build_carriage_rest();
 
 if (Show_clamps)
-	translate([-gauge,0,0])
-		clampUnit();
+    translate([-gauge,0,0])
+        clampUnit();
 
 color("red")
 translate([0,40,0])
 rotate([00,0,0]) {
-	text("Do not print from this file.", size=5);
-	translate([0,-15,0])
-	text("Assembly Visualisation.");
-	}
-	
+    text("Do not print from this file.", size=5);
+    translate([0,-15,0])
+    text("Assembly Visualisation.");
+    }
+    
 // Note:
 // - Need to mod a few files to pass gauge,numNeedles through for this to work.
 // - Will also need to calc widths to space if allow multiple needle beds (for small printers/large beds)

@@ -27,22 +27,22 @@ Show_screws = true;
 /* [Hidden] */
 
 if (Show_backplate)
-	build_back_plate();   // mk2
+    build_back_plate();   // mk2
 if (Show_back_cover)
-	build_backCover();
+    build_backCover();
 if (Show_cams)
-	build_tCams();
+    build_tCams();
 if (Show_pointers)
-	build_pointers();
+    build_pointers();
 if (Show_spongebar)
-	build_spongeBar();
+    build_spongeBar();
 if (Show_screws)
-	carriageScrews();
+    carriageScrews();
 
 color("red")
 translate([0,40,0])
 rotate([00,0,0]) {
-	text("Do not print from this file.", size=5);
-	translate([0,-15,0])
-	text("Assembly Visualisation.");
-	}
+    text("Do not print from this file.", size=5);
+    translate([0,-15,0])
+    text("Assembly Visualisation.");
+    }

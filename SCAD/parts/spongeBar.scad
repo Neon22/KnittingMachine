@@ -14,8 +14,8 @@ tolerance = 0.2;
 /* [Hidden] */
 
 module spongeBar(width=gauge) { 
-	translate([0,-(NEEDLE_BED_DEPTH-COMB) + SPONGE_BAR/2, -1])
-		cube([width,SPONGE_BAR - tolerance*2,2], center=true);
+    translate([0,-(NEEDLE_BED_DEPTH-COMB) + SPONGE_BAR/2, -1])
+        cube([width,SPONGE_BAR - tolerance*2,2], center=true);
 }
 
 module frontRail(width=gauge, rounded=false, tolerance=tolerance) {
@@ -30,16 +30,16 @@ module frontRail(width=gauge, rounded=false, tolerance=tolerance) {
 
 
 module build_spongeBar() {
-	difference() {
-		union() {
-			translate([(gauge*numNeedles)/2 - gauge/2, 0, 0])
-				frontRail(width = (numNeedles) * gauge, rounded = true);
-			translate([gauge*numNeedles/2 - gauge/2, 0, 0])
-				spongeBar(width = numNeedles*gauge);
-		}
-		// subtract holes
-		needleBedScrews(numNeedles, gauge);
-	}
+    difference() {
+        union() {
+            translate([(gauge*numNeedles)/2 - gauge/2, 0, 0])
+                frontRail(width = (numNeedles) * gauge, rounded = true);
+            translate([gauge*numNeedles/2 - gauge/2, 0, 0])
+                spongeBar(width = numNeedles*gauge);
+        }
+        // subtract holes
+        needleBedScrews(numNeedles, gauge);
+    }
 }
 
 
