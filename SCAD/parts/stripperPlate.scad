@@ -1,6 +1,12 @@
 include<../modules/params.scad>;
 use<../modules/carriageScrews.scad>;
 
+/* [Parameters] */
+// Show screws cutaway
+Show_cutaway = false;
+/* [Hidden] */
+
+
 module stripperPlate() {
     color("DodgerBlue")
     hull() {
@@ -93,5 +99,12 @@ module build_stripper_plate() {
 
 
 //
-build_stripper_plate();
-//yarnCarrierCutout();  // used by yarnCarrierCover()
+if (Show_cutaway) {
+difference() {
+    build_stripper_plate();
+    color("Red")
+    translate([-21,-200,-14])
+        cube(30);
+    }
+} else
+    build_stripper_plate();
