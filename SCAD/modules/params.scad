@@ -1,3 +1,5 @@
+
+use <screws.scad>
 /*
 
 Values in `camelCase` are user-variable (within reason); 
@@ -94,7 +96,29 @@ railHeight = 8; // ???
 xOffset = 16.5;
 //vCamScrews = [[34-xOffset, -90.25, 0],[58-xOffset, -74.25, 0],[86-xOffset,-90.25, 0]];
 
-echo(needleSlotHeight);
+// Screw selection:
+// Needlebed Spongebar (4-40 x 3/4in long)
+module Screw1(extra_cap=2, extra_length=0) {
+    screw_4_40_A(extra_cap, extra_length);
+    }
+
+// Carriage plate (smaller 1/2in long)
+module Screw2(extra_cap=1, extra_length=0) {
+    screw_4_40_B(extra_cap, extra_length);
+    }
+
+// Carriage stripper plate (smaller 1/4in long)
+module Screw4(extra_cap=1, extra_length=0) {
+    screw_4_40_C(extra_cap, extra_length);
+    }
+
+// Carriage screws and Carriage rest (6-32 x 1/2in (12mm))
+module Screw3(extra_cap=1, extra_length=0) {
+    screw_6_32_A(extra_cap, extra_length);
+    }
+
+
+
 
 
 
