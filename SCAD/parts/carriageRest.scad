@@ -5,7 +5,6 @@ use<../parts/spongeBar.scad>;
 use<../modules/connector.scad>;
 
 /* [Parameters] */
-
 // Knitting machine Bed Size
 gauge = 4.5;  // [4.5:STANDARD_GAUGE, 6.5:MID_GAUGE, 9.0:BULKY_GAUGE]
 // Number of Needles
@@ -15,14 +14,13 @@ tolerance = 0.2;
 Show_clamp = true;
 // Rotate for printing
 orientation = false;
-/* [Clamp] */
 
+/* [Clamp] */
 clampWidth = 50;
 clampThickness = 6;
 // Table Thickness
 clampHollow = 85;
 clampDepth = NEEDLE_BED_DEPTH - clampWidth/2;
-
 /* [Hidden] */
 
 //
@@ -33,10 +31,10 @@ module carriageRest() {
             hull() {  // build a single needlebed and hull to widen
                 needleBase();   
                 translate([-CAM_PLATE_WIDTH, -10, -needleBedHeight/2])
-                    cylinder(needleBedHeight, 10, 10, center=true); 
+                    cylinder(needleBedHeight, 10, 10, center=true, $fn=cylres50); 
                 
                 translate([-CAM_PLATE_WIDTH, -NEEDLE_BED_DEPTH+10, -needleBedHeight/2])
-                    cylinder(needleBedHeight, 10, 10, center=true); 
+                    cylinder(needleBedHeight, 10, 10, center=true, $fn=cylres50); 
             }
             // subtract angled front
             for(i = [0:ceil(CAM_PLATE_WIDTH/gauge)]) {
@@ -60,12 +58,16 @@ module carriageRest() {
 // clamp screws
 module clampScrew(side=1) {
     xpos = side * clampWidth/2 + side*-1 * screwHeadDiam*1.5;
+    color("Gold")
+    translate([xpos, 0, 3])
+    rotate([0,180,0])
+        Screw3();
     // screw
-    translate([xpos, 0, 0])
-        cylinder(screwHeight*2, d=screwDiam, center=true, $fn=cylres25);
+    //translate([xpos, 0, 0])
+    //    cylinder(screwHeight*2, d=screwDiam, center=true, $fn=cylres25);
     // screwhead
-    translate([xpos, 0, 0])
-        cylinder((screwHeadHeight + tolerance)*2, d=screwHeadDiam, center=true, $fn=cylres25);
+    //translate([xpos, 0, 0])
+    //    cylinder((screwHeadHeight + tolerance)*2, d=screwHeadDiam, center=true, $fn=cylres25);
 }
 
 // screwholes for clamp
