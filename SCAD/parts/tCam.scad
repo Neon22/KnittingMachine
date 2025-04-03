@@ -3,6 +3,11 @@ include<../modules/camplate_coords_mk2.scad>;
 include<../modules/utils.scad>;
 //include<../modules/camPinHoles.scad>;
 
+/* [Parameters] */
+// Show screws cutaway
+Show_cutaway = false;
+/* [Hidden] */
+
 
 module tCam() {
     // adjustable tension cams
@@ -18,13 +23,16 @@ module tCam() {
 }
 
 module tPivot(tol=0, solid=false) {
-    // pivot 
-    color("PeachPuff")
+    zdist = 13.5;  // depth of pivot hole
     difference() {
+        color("PeachPuff")
         cylinder(camPlateHeight + 3, d=8 + tol , center=true, $fn=cylres50);
         if(solid) {
-            translate([0,0,camPlateHeight/2])
-                cylinder(camPlateHeight, d = screwDiamSm , center=true, $fn=cylres50);
+            color("Gold")
+            translate([0,0,zdist])
+                Screw1();
+            //translate([0,0,camPlateHeight/2])
+            //    cylinder(camPlateHeight, d = screwDiamSm , center=true, $fn=cylres50);
         }
     }
 }
@@ -56,5 +64,13 @@ module build_tCams() {
 }
 
 
-// 
-build_tCams();
+//
+if (Show_cutaway) {
+difference() {
+    build_tCams();
+    color("Red")
+    translate([77,-115,0])
+        cube(24);
+    }
+} else
+    build_tCams();
