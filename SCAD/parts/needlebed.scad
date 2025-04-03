@@ -3,14 +3,12 @@ use<../modules/needlebedScrews.scad>;
 use<../modules/connector.scad>;
 
 /* [Parameters] */
-
 // Knitting machine Bed Size
 gauge = 4.5;  // [4.5:STANDARD_GAUGE, 6.5:MID_GAUGE, 9.0:BULKY_GAUGE]
 // Number of Needles
 numNeedles = 25;
 // 3D printer slop margin
 tolerance = 0.2;
-
 /* [Hidden] */
 
 module needleBase() {
@@ -44,7 +42,7 @@ module combCutout() {
         cylinder(h = needleBedHeight * 2 + 1, r = combWidth/2, $fn = 25, center=true);
 }
 
-module frontAngle(width = gauge) {
+module frontAngle(width=gauge) {
     lastPoint = needleBedHeight/tan(60);
     translate([0,-NEEDLE_BED_DEPTH - needleSlotHeight/2,-needleBedHeight - 1])
     rotate([180,90,0])

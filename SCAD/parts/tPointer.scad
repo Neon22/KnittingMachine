@@ -1,10 +1,9 @@
 include <../modules/camplate_coords_mk2.scad>;
 
 /* [Parameters] */
-
 // Rotate for printing
 orientation = false;
-
+/* [Hidden] */
 
 module tPointer() {
     color("PeachPuff")
