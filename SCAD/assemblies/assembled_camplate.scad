@@ -1,13 +1,10 @@
 include<../modules/params.scad>;
-include<../modules/camplate_coords_mk2.scad>;
-include<../modules/utils.scad>;
 use<../parts/backCover.scad>;
 use<../parts/backPlate.scad>;
-use<../parts/spongeBar.scad>;
 use<../parts/tCam.scad>;
 use<../parts/tPointer.scad>;
+use<../parts/spongeBar.scad>;
 use<../modules/carriageScrews.scad>;
-
 
 
 /* 
@@ -16,14 +13,12 @@ See individual files to export models
 */
 
 /* [Parameters] */
-
 Show_backplate = true;
 Show_back_cover = true;
 Show_cams = true;
 Show_pointers = true;
 Show_spongebar = true;
 Show_screws = true;
-
 /* [Hidden] */
 
 if (Show_backplate)

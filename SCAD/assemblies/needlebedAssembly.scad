@@ -10,10 +10,9 @@ See individual files to export models
 */
 
 /* [Parameters] */
-
-// Show Needle bed
-Show_bed = true;
+Show_needle_bed = true;
 Show_back_cover = true;
+// Round/Square backcover ends
 back_cover_rounded = true;
 Show_spongebar = true;
 Show_carriage_rests = true;
@@ -25,7 +24,7 @@ Show_clamps = true;
 
 
 // Show assembly
-if (Show_bed)
+if (Show_needle_bed)
     build_needle_bed();
 if (Show_back_cover) {
     color("lightblue")
