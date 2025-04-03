@@ -7,7 +7,6 @@ use<tCam.scad>;
 use<../modules/carriageScrews.scad>;
 
 /* [Parameters] */
-
 // Rotate for printing
 orientation = false;
 
@@ -113,6 +112,7 @@ module camRailsInlet() {
 
 //negative shaped "rounded sides" for entire plate
 module rounded_sides() {
+    color("Plum")
     difference() {
         // outer block
         union() {
@@ -135,7 +135,6 @@ module rounded_sides() {
 
 //
 module build_back_plate() {
-    color("Plum")
     difference() {
         union() {
             // top plate
@@ -145,30 +144,30 @@ module build_back_plate() {
             // Bumpers and guides
             // front left guide
             translate(frontWallCoords)
-            linear_extrude(camHeight)
+            linear_extrude(height=camHeight, convexity=2)
                 import("../../SVG/FrontWall_mk2.svg");
             // front right guide
             translate(flip(frontWallCoords))
             mirror([1,0,0])
-            linear_extrude(camHeight)
+            linear_extrude(height=camHeight, convexity=2)
                 import("../../SVG/FrontWall_mk2.svg");
             // left central bumper
             translate(bumperCoords)
-            linear_extrude(camHeight)
+            linear_extrude(height=camHeight, convexity=2)
                 import("../../SVG/BumperCam_mk2.svg");
             // right central bumper
             translate(flip(bumperCoords))
             mirror([1,0,0])
-            linear_extrude(camHeight)
+            linear_extrude(height=camHeight, convexity=2)
                 import("../../SVG/BumperCam_mk2.svg");
             // left rear bumper
             translate(backWallCoords)
-            linear_extrude(camHeight)
+            linear_extrude(height=camHeight, convexity=2)
                 import("../../SVG/BackWall_mk2.svg");
             // right rear bumper
             translate(flip(backWallCoords))
             mirror([1,0,0])
-            linear_extrude(camHeight)
+            linear_extrude(height=camHeight, convexity=2)
                 import("../../SVG/BackWall_mk2.svg");
         }
         // subtract rounded sides
@@ -180,6 +179,7 @@ module build_back_plate() {
 
 //
 if (orientation)
+translate([0,0,camHeight + railDepth/2])
     rotate([180,0,0])
     build_back_plate();  // mk2
 else
