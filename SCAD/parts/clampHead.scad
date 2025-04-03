@@ -2,6 +2,12 @@ include<../modules/params.scad>;
 
 // fits over the tip of the eyebolt to secure the clamp to the table; captive ball pivots inside the cone shape so do not print with supports!
 
+/* [Parameters] */
+//Double walled object
+Show_cutaway = false;
+/* [Hidden] */
+
+
 module clampHead() {
     boltDiam = 7.8;
    
@@ -21,4 +27,13 @@ module clampHead() {
     }
 }
 
-clampHead();
+if (Show_cutaway) {
+    difference() {
+        clampHead();
+        color("Red") {
+        translate([0,0,-15])
+            cube([30,30,30]);
+        }
+    }
+} else
+    clampHead();
