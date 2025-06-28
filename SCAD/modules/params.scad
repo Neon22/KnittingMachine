@@ -1,3 +1,5 @@
+
+use <screws.scad>
 /*
 
 Values in `camelCase` are user-variable (within reason); 
@@ -13,7 +15,12 @@ I recommend only modifying these constants if you are also
 making changes to the cam design in the technical sketch.
 */
 
+// sphere and cylinder facet counts
 $fn = 50;
+cylres30 = 30;  // roundedrail
+cylres25 = 25;  // connector
+cylres50 = 50;  // yarnfeeder, 
+cylres100 = 100;  // Yarnfeeder
 
 STANDARD_GAUGE = 4.5;
 MID_GAUGE = 6.5;
@@ -89,7 +96,29 @@ railHeight = 8; // ???
 xOffset = 16.5;
 //vCamScrews = [[34-xOffset, -90.25, 0],[58-xOffset, -74.25, 0],[86-xOffset,-90.25, 0]];
 
-echo(needleSlotHeight);
+// Screw selection:
+// Needlebed Spongebar (4-40 x 3/4in long)
+module Screw1(extra_cap=2, extra_length=0) {
+    screw_4_40_A(extra_cap, extra_length);
+    }
+
+// Carriage plate (smaller 1/2in long)
+module Screw2(extra_cap=1, extra_length=0) {
+    screw_4_40_B(extra_cap, extra_length);
+    }
+
+// Carriage stripper plate (smaller 1/4in long)
+module Screw4(extra_cap=1, extra_length=0) {
+    screw_4_40_C(extra_cap, extra_length);
+    }
+
+// Carriage screws and Carriage rest (6-32 x 1/2in (12mm))
+module Screw3(extra_cap=1, extra_length=0) {
+    screw_6_32_A(extra_cap, extra_length);
+    }
+
+
+
 
 
 
