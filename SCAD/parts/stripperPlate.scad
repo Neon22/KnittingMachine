@@ -62,10 +62,6 @@ module yarnCarrierCutout() {
         // wide cone front   
         translate([CAM_PLATE_WIDTH/2,YARN_DEPOSIT_Y - 35,(camHeight + camPlateHeight)/2])
             cylinder(h=camHeight + camPlateHeight, d=CAM_PLATE_WIDTH - 55*2, center=true, $fn=cylres50);
-                
-        // small frontmost
-        // translate([CAM_PLATE_WIDTH/2,YARN_DEPOSIT_Y - 35,-camPlateHeight])
-            // cylinder(h = camHeight + camPlateHeight*2, r = 10, center = true);
     }
 }
 
@@ -82,8 +78,7 @@ module half_stripper_plate() {
         translate([0,-(NEEDLE_BED_DEPTH + NEEDLE_EXTENSION + camPlateHeight + 2), 2])
             cube([CAM_PLATE_WIDTH + 4, camPlateHeight + 2, camPlateHeight + 2], center = false);
         //
-        //yarnCarrierCutout();
-        // screw oles
+        // screw holes
         carriageScrews();
     }
 }

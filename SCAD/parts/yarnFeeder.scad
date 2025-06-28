@@ -1,6 +1,5 @@
 include<../modules/params.scad>;
 use<../modules/carriageScrews.scad>;
-//use<../parts/stripperPlate.scad>;
 
 /* [Parameters] */
 

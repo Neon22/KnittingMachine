@@ -62,12 +62,6 @@ module clampScrew(side=1) {
     translate([xpos, 0, 3])
     rotate([0,180,0])
         Screw3();
-    // screw
-    //translate([xpos, 0, 0])
-    //    cylinder(screwHeight*2, d=screwDiam, center=true, $fn=cylres25);
-    // screwhead
-    //translate([xpos, 0, 0])
-    //    cylinder((screwHeadHeight + tolerance)*2, d=screwHeadDiam, center=true, $fn=cylres25);
 }
 
 // screwholes for clamp
@@ -158,8 +152,3 @@ if (Show_clamp)
     else 
         translate([-gauge,0,0])
             clampUnit();
-    
-
-
-// Questions:
-// - is it better to use screws to screw in front and rear rails so printing is easier

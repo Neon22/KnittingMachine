@@ -1,7 +1,6 @@
 include<../modules/params.scad>;
 include<../modules/camplate_coords_mk2.scad>;
 include<../modules/utils.scad>;
-//include<../modules/camPinHoles.scad>;
 
 /* [Parameters] */
 // Show screws cutaway
@@ -31,8 +30,6 @@ module tPivot(tol=0, solid=false) {
             color("Gold")
             translate([0,0,zdist])
                 Screw1();
-            //translate([0,0,camPlateHeight/2])
-            //    cylinder(camPlateHeight, d = screwDiamSm , center=true, $fn=cylres50);
         }
     }
 }

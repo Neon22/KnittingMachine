@@ -184,6 +184,3 @@ translate([0,0,camHeight + railDepth/2])
     build_back_plate();  // mk2
 else
     build_back_plate();  // mk2
-// camRails();
-// camRailsInlet();
-// rounded_sides();
